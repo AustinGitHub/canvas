@@ -30,7 +30,7 @@ function states(state = {}, action) {
 	case SET_CONDITION_STATES: {
 		const newState = state;
 		newState[action.property.id] = {
-			value: action.property.id,
+			propertyId: action.property.id,
 			defaultValue: action.property.value,
 			displayState: action.property.displayState,
 		};
