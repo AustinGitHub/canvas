@@ -16,6 +16,8 @@
     "numberfieldSeed": 12345,
     "checkboxTypes": [],
     "oneofselectAnimals": "",
+    "oneofselectPets": "turtle",
+    "oneofselectPets2": "horse",
     "someofselectNumbers": [],
     "checkboxSingle": true,
     "checkboxEnable": false,
