@@ -1069,7 +1069,7 @@ export default class PropertiesController {
 
 		if (this.handlers.propertyListener) {
 			const convertedValue = this._convertObjectStructure(propertyId, value);
-			const updatedIds = this.getPropertyUpdating();
+			const updatedIds = this.getConditionStates();
 			const data = {
 				action: ACTIONS.UPDATE_PROPERTY,
 				property: propertyId,
@@ -1320,8 +1320,8 @@ export default class PropertiesController {
 		return state ? state.enumFilter : {};
 	}
 
-	getPropertyUpdating() {
-		const state = this.propertiesStore.getPropertyUpdating();
+	getConditionStates() {
+		const state = this.propertiesStore.getConditionStates();
 		return (state) ? state : "";
 	}
 	updateConditionStates(values) {

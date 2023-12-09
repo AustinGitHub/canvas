@@ -160,7 +160,7 @@ export default class PropertiesStore {
 		}
 	}
 
-	getPropertyUpdating() {
+	getConditionStates() {
 		const state = this.store.getState();
 		return PropertyUtils.copy(state.conditionStatesReducer);
 	}
