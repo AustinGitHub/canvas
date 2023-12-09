@@ -44,7 +44,8 @@ export const CLEAR_STATIC_ROWS = "CLEAR_STATIC_ROWS";
 export const SET_TABLE_BUTTON_ENABLED = "SET_TABLE_BUTTON_ENABLED";
 export const SET_HIDE_EDIT_BUTTON = "SET_HIDE_EDIT_BUTTON";
 export const SET_ACTIVE_TEARSHEET = "SET_ACTIVE_TEARSHEET";
-
+export const SET_CONDITION_STATES = "SET_CONDITION_STATES";
+export const UPDATE_CONDITION_STATES = "UPDATE_CONDITION_STATES";
 
 /*
  * action creators
@@ -65,6 +66,13 @@ export function removePropertyValue(property) {
 	return { type: REMOVE_PROPERTY_VALUE, property };
 }
 
+export function setConditionStates(property) {
+	return { type: SET_CONDITION_STATES, property };
+}
+
+export function updateConditionStates(property) {
+	return { type: UPDATE_CONDITION_STATES, property };
+}
 
 export function setControlStates(states) {
 	return { type: SET_CONTROL_STATES, states };

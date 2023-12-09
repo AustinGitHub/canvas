@@ -22,6 +22,8 @@ import { setControlStates, updateControlState } from "./actions";
 import { setPanelStates, updatePanelState } from "./actions";
 import { setActionStates, updateActionState } from "./actions";
 
+import { setConditionStates, updateConditionStates } from "./actions";
+
 import { clearSelectedRows, updateSelectedRows, disableRowMoveButtons } from "./actions";
 import { clearStaticRows, updateStaticRows } from "./actions";
 import { setErrorMessages, updateErrorMessage, clearErrorMessage } from "./actions";
@@ -30,6 +32,7 @@ import { setTitle, setActiveTab } from "./actions";
 import propertiesReducer from "./reducers/properties";
 import controlStatesReducer from "./reducers/control-states";
 import panelStatesReducer from "./reducers/panel-states";
+import conditionStatesReducer from "./reducers/condition-states";
 import actionStatesReducer from "./reducers/action-states";
 import errorMessagesReducer from "./reducers/error-messages";
 import datasetMetadataReducer from "./reducers/dataset-metadata";
@@ -48,7 +51,7 @@ import { CONDITION_MESSAGE_TYPE, MESSAGE_KEYS } from "./constants/constants.js";
 
 export default class PropertiesStore {
 	constructor() {
-		this.combinedReducer = combineReducers({ propertiesReducer, controlStatesReducer, panelStatesReducer,
+		this.combinedReducer = combineReducers({ propertiesReducer, controlStatesReducer, conditionStatesReducer, panelStatesReducer,
 			errorMessagesReducer, datasetMetadataReducer, rowSelectionsReducer, componentMetadataReducer,
 			disableRowMoveButtonsReducer, actionStatesReducer, wideFlyoutPrimaryButtonDisableReducer, tearsheetStatesReducer,
 			saveButtonDisableReducer, propertiesSettingsReducer, rowFreezeReducer });
@@ -155,6 +158,19 @@ export default class PropertiesStore {
 		if (!isEqual(this.getControlStates(), values)) {
 			this.store.dispatch(setControlStates(values));
 		}
+	}
+
+	getPropertyUpdating() {
+		const state = this.store.getState();
+		return PropertyUtils.copy(state.conditionStatesReducer);
+	}
+
+	updateConditionStates(values) {
+		this.store.dispatch(updateConditionStates(values));
+	}
+
+	setConditionStates(propertyId, value, displayState) {
+		this.store.dispatch(setConditionStates({ id: propertyId, value: value, displayState: displayState }));
 	}
 
 	updateControlState(propertyId, value) {

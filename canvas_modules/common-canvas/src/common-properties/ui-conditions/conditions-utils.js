@@ -467,6 +467,12 @@ function updateState(refState, propertyId, value, controller) {
 		propState.value = newPropState.value;
 	}
 	refState[propertyId.name] = propState;
+	let defaultValue = "";
+	if (typeof controller?.controls?.[propertyId.name]?.valueDef?.defaultValue !== "undefined") {
+		defaultValue = controller.controls[propertyId.name].valueDef.defaultValue;
+	}
+	const displayState = propState.value;
+	controller.setConditionStates(propertyId.name, defaultValue, displayState);
 }
 
 /**

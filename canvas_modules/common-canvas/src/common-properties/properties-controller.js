@@ -1061,6 +1061,7 @@ export default class PropertiesController {
 			this.propertiesStore.updatePropertyValue(propertyId, initialValue);
 			return;
 		}
+		this.updateConditionStates({});
 		conditionsUtil.validateConditions(inPropertyId, this);
 		if (!skipValidateInput) {
 			conditionsUtil.validateInput(inPropertyId, this, true);
@@ -1068,15 +1069,18 @@ export default class PropertiesController {
 
 		if (this.handlers.propertyListener) {
 			const convertedValue = this._convertObjectStructure(propertyId, value);
+			const updatedIds = this.getPropertyUpdating();
 			const data = {
 				action: ACTIONS.UPDATE_PROPERTY,
 				property: propertyId,
 				value: convertedValue,
-				previousValue: initialValue
+				previousValue: initialValue,
+				renderedIds: updatedIds
 			};
 			if (typeof type !== "undefined") {
 				data.type = type;
 			}
+			this.updateConditionStates({});
 			this.handlers.propertyListener(data);
 		}
 	}
@@ -1314,6 +1318,18 @@ export default class PropertiesController {
 	getControlEnumFilterStates(propertyId) {
 		const state = this.propertiesStore.getControlState(propertyId);
 		return state ? state.enumFilter : {};
+	}
+
+	getPropertyUpdating() {
+		const state = this.propertiesStore.getPropertyUpdating();
+		return (state) ? state : "";
+	}
+	updateConditionStates(values) {
+		this.propertiesStore.updateConditionStates(values);
+	}
+
+	setConditionStates(propertyId, value, displayState) {
+		this.propertiesStore.setConditionStates(propertyId, value, displayState);
 	}
 
 	/**

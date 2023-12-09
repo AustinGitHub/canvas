@@ -608,52 +608,143 @@ function _makeControl(parameterMetadata, paramName, group, structureDefinition, 
 		action = _makeAction(actionMetadata.getAction(parameter.actionRef), l10nProvider);
 	}
 	const settings = {};
-	settings.name = parameter.name;
-	settings.label = controlLabel;
-	settings.description = controlDesc;
+	if (typeof parameter.name !== "undefined") {
+		settings.name = parameter.name;
+	}
+	if (typeof controlLabel !== "undefined") {
+		settings.label = controlLabel;
+	}
+	if (typeof controlDesc !== "undefined") {
+		settings.description = controlDesc;
+	}
 	settings.labelVisible = typeof parameter.labelVisible === "boolean" ? parameter.labelVisible : labelVisible;
-	settings.controlType = parameter.getControl(controlType);
-	settings.valueDef = ValueDef.make(parameter);
-	settings.structureType = structureType;
-	settings.role = role;
-	settings.additionalText = additionalText;
-	settings.orientation = orientation;
-	settings.values = parameter.getValidValues();
-	settings.valueLabels = valueLabels;
-	settings.valueDescs = valueDescs;
-	settings.valueIcons = parameter.valueIcons;
-	settings.sortable = parameter.sortable;
-	settings.filterable = parameter.filterable;
-	settings.resizable = parameter.resizable;
-	settings.charLimit = parameter.charLimit;
-	settings.subControls = subControls;
-	settings.keyIndex = keyIndex;
-	settings.defaultRow = defaultRow;
-	settings.childItem = childItem;
-	settings.moveableRows = moveableRows;
-	settings.required = required;
-	settings.language = parameter.language;
-	settings.enableMaximize = parameter.enableMaximize;
-	settings.summary = parameter.summary;
-	settings.increment = parameter.increment;
-	settings.rowSelection = rowSelection;
-	settings.generatedValues = parameter.generatedValues;
-	settings.addRemoveRows = addRemoveRows;
-	settings.dateFormat = parameter.dateFormat;
-	settings.timeFormat = parameter.timeFormat;
-	settings.customControlId = parameter.customControlId;
-	settings.data = parameter.data;
-	settings.rows = parameter.rows;
-	settings.displayChars = parameter.displayChars;
-	settings.header = header;
-	settings.uionly = parameter.uionly;
-	settings.includeAllFields = includeAllFields;
-	settings.layout = layout;
-	settings.dmImage = parameter.dmImage;
-	settings.action = action;
-	settings.customValueAllowed = parameter.customValueAllowed;
-	settings.className = parameter.className;
-	settings.buttons = buttons;
+	if (typeof parameter.getControl(controlType) !== "undefined") {
+		settings.controlType = parameter.getControl(controlType);
+	}
+	if (typeof ValueDef.make(parameter) !== "undefined") {
+		settings.valueDef = ValueDef.make(parameter);
+	}
+	if (typeof structureType !== "undefined") {
+		settings.structureType = structureType;
+	}
+	if (typeof role !== "undefined") {
+		settings.role = role;
+	}
+	if (typeof additionalText !== "undefined") {
+		settings.additionalText = additionalText;
+	}
+	if (typeof orientation !== "undefined") {
+		settings.orientation = orientation;
+	}
+	if (typeof parameter.getValidValues() !== "undefined") {
+		settings.values = parameter.getValidValues();
+	}
+	if (typeof valueLabels !== "undefined") {
+		settings.valueLabels = valueLabels;
+	}
+	if (typeof valueDescs !== "undefined") {
+		settings.valueDescs = valueDescs;
+	}
+	if (typeof parameter.valueIcons !== "undefined") {
+		settings.valueIcons = parameter.valueIcons;
+	}
+	if (typeof parameter.sortable !== "undefined") {
+		settings.sortable = parameter.sortable;
+	}
+	if (typeof parameter.filterable !== "undefined") {
+		settings.filterable = parameter.filterable;
+	}
+	if (typeof parameter.resizable !== "undefined") {
+		settings.resizable = parameter.resizable;
+	}
+	if (typeof parameter.charLimit !== "undefined") {
+		settings.charLimit = parameter.charLimit;
+	}
+	if (typeof subControls !== "undefined") {
+		settings.subControls = subControls;
+	}
+	if (typeof keyIndex !== "undefined") {
+		settings.keyIndex = keyIndex;
+	}
+	if (typeof defaultRow !== "undefined") {
+		settings.defaultRow = defaultRow;
+	}
+	if (typeof childItem !== "undefined") {
+		settings.childItem = childItem;
+	}
+	if (typeof moveableRows !== "undefined") {
+		settings.moveableRows = moveableRows;
+	}
+	if (typeof required !== "undefined") {
+		settings.required = required;
+	}
+	if (typeof parameter.language !== "undefined") {
+		settings.language = parameter.language;
+	}
+	if (typeof parameter.enableMaximize !== "undefined") {
+		settings.enableMaximize = parameter.enableMaximize;
+	}
+	if (typeof parameter.summary !== "undefined") {
+		settings.summary = parameter.summary;
+	}
+	if (typeof parameter.increment !== "undefined") {
+		settings.increment = parameter.increment;
+	}
+	if (typeof rowSelection !== "undefined") {
+		settings.rowSelection = rowSelection;
+	}
+	if (typeof parameter.generatedValues !== "undefined") {
+		settings.generatedValues = parameter.generatedValues;
+	}
+	if (typeof addRemoveRows !== "undefined") {
+		settings.addRemoveRows = addRemoveRows;
+	}
+	if (typeof parameter.dateFormat !== "undefined") {
+		settings.dateFormat = parameter.dateFormat;
+	}
+	if (typeof parameter.timeFormat !== "undefined") {
+		settings.timeFormat = parameter.timeFormat;
+	}
+	if (typeof parameter.customControlId !== "undefined") {
+		settings.customControlId = parameter.customControlId;
+	}
+	if (typeof parameter.data !== "undefined") {
+		settings.data = parameter.data;
+	}
+	if (typeof parameter.rows !== "undefined") {
+		settings.rows = parameter.rows;
+	}
+	if (typeof parameter.displayChars !== "undefined") {
+		settings.displayChars = parameter.displayChars;
+	}
+	if (typeof header !== "undefined") {
+		settings.header = header;
+	}
+	if (typeof parameter.uionly !== "undefined") {
+		settings.uionly = parameter.uionly;
+	}
+	if (typeof includeAllFields !== "undefined") {
+		settings.includeAllFields = includeAllFields;
+	}
+	if (typeof layout !== "undefined") {
+		settings.layout = layout;
+	}
+	if (typeof parameter.dmImage !== "undefined") {
+		settings.dmImage = parameter.dmImage;
+	}
+	if (typeof action !== "undefined") {
+		settings.action = action;
+	}
+	if (typeof parameter.customValueAllowed !== "undefined") {
+		settings.customValueAllowed = parameter.customValueAllowed;
+	}
+	if (typeof parameter.className !== "undefined") {
+		settings.className = parameter.className;
+	}
+	if (typeof buttons !== "undefined") {
+		settings.buttons = buttons;
+	}
+
 	settings.light = _isControlLight(additionalInfo.light, additionalInfo.containerType, parameter.isSubPanelEdit());
 	if (isSubControl) {
 		settings.visible = parameter.visible;
