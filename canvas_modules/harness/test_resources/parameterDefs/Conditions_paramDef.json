@@ -15,8 +15,7 @@
     "numberfieldMinInstancesPerNode": 2,
     "numberfieldSeed": 12345,
     "checkboxTypes": [],
-    "oneofselectAnimals": "",
-    "oneofselectPets": "turtle",
+    "oneofselectAnimals": "lions",
     "someofselectNumbers": [],
     "checkboxSingle": false,
     "checkboxEnable": false,
@@ -247,7 +246,8 @@
         "horse",
         "tiger",
         "monkey"
-      ]
+      ],
+      "default": "lion"
     },
     {
       "id": "oneofselectPets",

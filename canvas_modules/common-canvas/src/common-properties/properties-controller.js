@@ -447,7 +447,17 @@ export default class PropertiesController {
 
 	setDefaultControlValues(defaultControlValues) {
 		// Update all default values
-		this.propertiesStore.setPropertyValues(defaultControlValues);
+
+		// Comment out the code block to see issue
+		// block start
+		const currentProperties = this.getPropertyValues();
+		const newProperites = {
+			...currentProperties,
+			...defaultControlValues,
+		};
+		// block end
+
+		this.propertiesStore.setPropertyValues(newProperites);
 
 		// Single call to the propertyListener
 		if (this.handlers.propertyListener) {
@@ -1072,35 +1082,43 @@ export default class PropertiesController {
 	* Property Values Methods
 	*/
 	updatePropertyValue(inPropertyId, value, skipValidateInput, type) {
+		// For testing purpose, converted this method to force setPropertyValues instead of original method
 		const propertyId = this.convertPropertyId(inPropertyId);
-		const initialValue = this.getPropertyValue(propertyId);
-		if (typeof value === "undefined") {
-			this.removePropertyValue(propertyId);
-		} else {
-			this.propertiesStore.updatePropertyValue(propertyId, value);
-		}
-		if (!conditionsUtil.allowConditions(inPropertyId, this)) {
-			this.propertiesStore.updatePropertyValue(propertyId, initialValue);
-			return;
-		}
-		conditionsUtil.validateConditions(inPropertyId, this);
-		if (!skipValidateInput) {
-			conditionsUtil.validateInput(inPropertyId, this, true);
-		}
+		const currentProperties = this.getPropertyValues({ filterHiddenDisabled: true });
+		currentProperties[propertyId.name] = value;
+		// Uncomment one or the other to see the issue
+		// this.setPropertyValues(currentProperties);
+		this.setPropertyValues(currentProperties, { setDefaultValues: true });
 
-		if (this.handlers.propertyListener) {
-			const convertedValue = this._convertObjectStructure(propertyId, value);
-			const data = {
-				action: ACTIONS.UPDATE_PROPERTY,
-				property: propertyId,
-				value: convertedValue,
-				previousValue: initialValue
-			};
-			if (typeof type !== "undefined") {
-				data.type = type;
-			}
-			this.handlers.propertyListener(data);
-		}
+
+		// const initialValue = this.getPropertyValue(propertyId);
+		// if (typeof value === "undefined") {
+		// 	this.removePropertyValue(propertyId);
+		// } else {
+		// 	this.propertiesStore.updatePropertyValue(propertyId, value);
+		// }
+		// if (!conditionsUtil.allowConditions(inPropertyId, this)) {
+		// 	this.propertiesStore.updatePropertyValue(propertyId, initialValue);
+		// 	return;
+		// }
+		// conditionsUtil.validateConditions(inPropertyId, this);
+		// if (!skipValidateInput) {
+		// 	conditionsUtil.validateInput(inPropertyId, this, true);
+		// }
+
+		// if (this.handlers.propertyListener) {
+		// 	const convertedValue = this._convertObjectStructure(propertyId, value);
+		// 	const data = {
+		// 		action: ACTIONS.UPDATE_PROPERTY,
+		// 		property: propertyId,
+		// 		value: convertedValue,
+		// 		previousValue: initialValue
+		// 	};
+		// 	if (typeof type !== "undefined") {
+		// 		data.type = type;
+		// 	}
+		// 	this.handlers.propertyListener(data);
+		// }
 	}
 
 	/*
@@ -1195,6 +1213,9 @@ export default class PropertiesController {
 	*   filterHiddenControls: true - filter out values from controls having type "hidden"
 	*/
 	getPropertyValues(options) {
+		if (options) { // To force hidden disabled for testing purposes
+			options.filterHiddenDisabled = true;
+		}
 		const propertyValues = this.propertiesStore.getPropertyValues();
 		let returnValues = propertyValues;
 		if (options && (options.filterHiddenDisabled || options.filterHidden || options.filterDisabled || options.filterHiddenControls || options.valueFilters)) {
