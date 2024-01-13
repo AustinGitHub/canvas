@@ -451,13 +451,13 @@ export default class PropertiesController {
 		// Comment out the code block to see issue
 		// block start
 		const currentProperties = this.getPropertyValues();
-		const newProperites = {
+		const newProperties = {
 			...currentProperties,
 			...defaultControlValues,
 		};
 		// block end
 
-		this.propertiesStore.setPropertyValues(newProperites);
+		this.propertiesStore.setPropertyValues(newProperties);
 
 		// Single call to the propertyListener
 		if (this.handlers.propertyListener) {
